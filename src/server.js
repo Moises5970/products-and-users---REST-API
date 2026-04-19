@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./db.js";
 
-
+// importar rutas
+import usuariosRoutes from "./routes/usuario.routes.js"
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ app.use(express.json());
 // Healthcheck
 app.get("/health", (req, res) => res.json({ ok: true, service: "trace-api-mongo" }));
 
-// Rutas
+// configurar rutas
+app.use("/api/usuarios", usuariosRoutes);
 
 // Manejo de errores
 app.use((err, req, res, next) => {
