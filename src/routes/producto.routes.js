@@ -13,23 +13,16 @@ router.post("/", async (req, res, next) => {
     const db = await getDB();
 
     // Datos del productos
-    const { nombre, costo, stock, activo } = req.body;
-
-    // verificacion de los datos
-    if (!nombre || !costo || !stock) {
-      return res.status(400).json({
-        ok: false,
-        error: "nombre, costo y stock son requeridos",
-      });
-    }
+    const { nombre, precio, stock, categoria, creadoPor, fechaCreacion } = req.body;
 
     // creacion del documento
     const doc = {
       nombre,
-      costo,
+      precio,
       stock,
-      activo: activo ?? true,
-      createAt: new Date(),
+      categoria,
+      creadoPor,
+      fechaCreacion: new Date(),
     };
 
     // guardar los datos

@@ -13,24 +13,14 @@ router.post("/", async (req, res, next) => {
     const db = await getDB();
 
     // Datos del usuario
-    const { nombre, email, telefono, contraseña, activo } = req.body;
-
-    // verificacion de los datos
-    if (!nombre || !email || !contraseña) {
-      return res.status(400).json({
-        ok: false,
-        error: "nombre, apodo, email y contraseña son requeridos",
-      });
-    }
+    const { nombre, email, rol} = req.body;
 
     // creacion del documento
     const doc = {
       nombre,
       email,
-      telefono: telefono ?? null,
-      contraseña,
-      activo: activo ?? true,
-      createAt: new Date(),
+      rol,
+      fechaRegistro: new Date(),
     };
 
     // guardar los datos
