@@ -7,7 +7,7 @@
     Your branch is up to date with 'origin/main'
 6. Apartir de ahi se realiza los commit de la misma manera, cabe aclarar que solo los dejara si tienes acceso.
 
-# Configuración del entrono
+# Configuración del entorno
 1. En la terminal ejecutamos los siguientes comandos:
     - npm init -y
     - npm i express mongodb dotenv  
