@@ -128,7 +128,7 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 
-
+//============================== Consultas avanzadas con agregaciones ===========================================
 /**
  * GET /api/productos/stats/categorias
  * Productos por categoria
