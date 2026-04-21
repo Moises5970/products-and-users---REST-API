@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDB, toObject } from "../db/mongodb.js";
+import { getDB } from '../db.js';
 
 const router = Router();
 
