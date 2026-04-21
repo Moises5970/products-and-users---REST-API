@@ -51,3 +51,96 @@ Integridad de los datos y la estandarización de respuestas de error.
     * **404 (Not Found):** Captura de rutas inexistentes para evitar respuestas HTML por defecto de Express.
     * **500 (Internal Server Error):** Manejo seguro de errores inesperados.
 * **Conexión Segura:** Integración de las reglas de validación en el ciclo de vida del arranque del servidor en `db.js`.
+
+# Rutas
+### Usuarios
+
+```
+http://localhost:3000/usuarios
+```
+
+#### POST
+
+Crear/registrar usuarios.
+
+![crear usuario](imag/image1.png)
+
+#### GET
+
+Obtener los usuarios registrados.
+
+![Obtener usuarios registrados](imag/image2.png)
+
+#### GET /:id
+
+Obtener un usuario en especifico.
+
+![Obtener a un usuario](imag/image3.png)
+
+#### PUT /:id
+
+Actualizar un usuario.
+![Actualizar un usuario](imag/image4.png)
+
+#### DELETE /:id
+
+Eliminar un usuario.
+![Eliminar un usuario](imag/image5.png)
+
+
+### Productos
+
+```
+http://localhost:3000/productos
+```
+
+#### POST
+
+Crear/registrar productos.
+![Resgistrar un producto](/imag/image6.png)
+
+Se requiere el ID para identificar quien esta registrando el producto.
+
+#### GET
+
+Obtener los productos registrados.
+![Obtener todos los productos registrados](imag/image7.png)
+
+#### GET /:id
+
+Obtener un producto en especifico.
+![Obtener un producto especifico](imag/image8.png)
+
+#### PUT /:id
+
+Actualizar un producto.
+![Actualizar un producto es especifico](imag/image9.png)
+
+#### DELETE /:id
+
+Eliminar un producto.
+![Eliminar un producto en especifico](imag/image10.png)
+
+### Ventas
+
+```
+http://localhost:3000/ventas
+```
+
+#### POST
+![Registrar una venta](imag/image11.png)
+En este caso se ingresa el ID por medio de body, que es otra forma de solicitarlo, ademas nos retorna el tortal a pagar de la venta.
+
+#### GET
+![Obtener todas las ventas](imag/image12.png)
+
+#### DELETE /:id
+![Eliminar una venta](imag/image13.png)
+
+#### Consultas avanzadas con agregaciones
+
+Suma del total de ventas y de la cantidad de productos vendidos.
+![Resultado de la primiero consulta avnazada](imag/image14.png)
+
+Cantidad de productos por categoria.
+![Resultado de la segunda consulta avanzada](imag/image15.png)
