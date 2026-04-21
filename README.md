@@ -17,6 +17,10 @@ En la sección "scripts" se añaden los comandos:
     "dev": "nodemon src/server.js", 
     "start": "node src/server.js"
 Sustituimos el *"type": "commonjs"* por *"type": "module"*
+3. En la raiz se creara un archivo .env que debera contener lo siguiente:
+    - PORT=Puerto disponible
+    - MONGO_URI=Ésta debe contener el usuario y contraseña creadas en la bd ejemplo (mongodb+srv://nombredb_user:contraseñadb_user@cluster0.oeft324.mongodb.net/?retryWrites=true&w=majority)
+    - DB_NAME=Gestiones
 
 # Modelos y Validaciones de BD
 
@@ -181,3 +185,22 @@ http://localhost:3000/api/productos/stats/categorias
 
 Cantidad de productos por categoria.
 ![Resultado de la segunda consulta avanzada](imag/image15.png)
+
+# Render
+1. Primero accedemos a render y seleccionamos *Web Service*
+2. Insertamos el link de GitHub para clonar.
+3. Configuración:
+  - Start Command = node src/server.js
+  - Agregamos Environment Variables 
+    - DB_NAME
+    - MONGO_URI
+  Se utilizan las mismas credenciales que el .env
+4. Click en Create Web Service y obtendremos lo siguiente:
+  - instalación de dependencias
+  - levantar tu servidor
+  - Genera una URL en esta ocación obtuvimos: https://products-and-users-rest-api.onrender.com
+5. Utilización de la URL
+  |_URL_Render____________________________________| + |ruta_api___|
+  https://products-and-users-rest-api.onrender.com    /api/productos
+En postman se puede utilizar de esta manera sin levantar el servidor localmente. Tambien se puede insertar la URL directamente en un navegador y obtendremos una lista de arreglos.
+![Resultado la utilización en Chrome](imag/render.png)
