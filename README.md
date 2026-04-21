@@ -41,7 +41,7 @@ Dado que las colecciones fueron creadas y pobladas previamente, se utilizó el c
   * Restricciones: La `cantidad` mínima es 1 y el `total` no puede ser menor a 0.
   * Relación: `productoId` exige un formato `ObjectId` válido.
 
-  ### Integrante 2: Validación y Manejo de Errores
+  ###  Validación y Manejo de Errores
 Integridad de los datos y la estandarización de respuestas de error.
 
 * **Validación Nativa en MongoDB:** Implementación de esquemas de validación mediante `collMod` y `$jsonSchema` para garantizar que solo ingresen datos válidos (precios positivos, stock no negativo, campos obligatorios) directamente a nivel de base de datos.
