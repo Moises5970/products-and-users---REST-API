@@ -17,3 +17,21 @@ En la sección "scripts" se añaden los comandos:
     "dev": "nodemon src/server.js", 
     "start": "node src/server.js"
 Sustituimos el *"type": "commonjs"* por *"type": "module"*
+
+# Modelos y Validaciones de BD
+
+Para esta API, se implementó la validación de esquemas nativos de MongoDB utilizando `$jsonSchema` utilizando el driver oficial.
+
+* **Usuarios** *Campos Obligatorios: `nombre`, `email`, `rol`.
+  * Validación estricta de formato de correo electronico mediante las expresiones regulares.
+  * Restricción de valores para el campo del `rol` permiriendo solo dos tipo 'admin' o 'cliente'
+
+* **Productos:**
+  * Campos obligatorios: `nombre`, `precio`, `categoria`.
+  * Restricciones: Se prohíbe el insertar de valores negativos en los campos `precio` y `stock`.
+  * Relaciones: Implementación de referencia guardando el `ObjectId` del usuario en el campo `creadoPor`.
+
+* **Ventas:**
+  * Campos obligatorios: `productoId`, `cantidad`, `total`.
+  * Relación: Enlace con el documento de la colección de productos mediante `ObjectId`.
+  * Reglas de negocio: La `cantidad` mínima de venta es 1 y el `total` no puede ser un valor negativo.

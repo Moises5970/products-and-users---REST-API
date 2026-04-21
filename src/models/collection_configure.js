@@ -1,3 +1,4 @@
+import { bsonType } from "bson";
 
 export async function configurarColecciones(db) { // Recibe la instancia de la base de datos
     try {
@@ -83,4 +84,42 @@ export async function configurarColecciones(db) { // Recibe la instancia de la b
             console.error("Error al configurar productos:", error); // Si ocurre otro tipo de error se mustra
         }
     }
+
+    try { // Modelo de ventas con validaciones y relaciones 
+        // 3. Modelos de ventas 
+        await db.command({ // modifica la coleccion ventas para agregar validaciones 
+            collMod: "ventas", // Nombre de la coleccion que se modifica 
+            validator:{ // Validacion para el modelo de ventas 
+                $jsonSchema: { // Esquema json para validar los documentos que vienen de ventas
+                    bsonType: "object", // debe ser de tipo objeto
+                    required: ["productoId", "cantidad", "total"], // son los campos obligatorios 
+                    properties:{ // propiedades y validaciones
+                        productoId: { // campo productoid para establecer la relacion con models de productos 
+                            bsonType: "objectId", // El tipo de dato del campo productoId deber ser tipo objeto
+                            description: "Id del producto vendido"
+                        },
+                        cantidad: { // campo cantidad para la cantidad de productos vendidos
+                            bsonType: "int", // El tipo de dato del campo cantidad debe ser entero
+                            minimum: 1, // La cantidad mínima debe ser 1
+                            description: "La cantidad es solicitada y debe ser por lo menos 1"
+                        },
+                        total: { // campo total para el total de la venta
+                            bsonType: "double", // El tipo de dato del campo total debe ser double para permitir decimales
+                            minimum: 0, // El total mínimo debe ser 0, no puede ser negativo
+                            description: "El total de la venta es solicitado y no puede ser negativo"
+                        },
+                        fecha: { // campo fecha para la fecha de la venta
+                            bsonType: "date" // El tipo de dato del campo fecha debe ser fecha
+                        }
+                    }
+                }
+            }
+        })
+        console.log("Regla de validacion en ventas"); // Si la regla de validacion se agrega  se muestra el mensaje
+        
+    } catch (error){ // Si ocurre un error al agregar la regla de validacion en ventas entra aqui
+        console.error("Error al configurar ventas " , error); // Si ocurre un error se muestra este mensaje
+        
+    }
+
 }
