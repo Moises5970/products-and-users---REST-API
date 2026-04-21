@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
@@ -25,7 +25,12 @@
     "mongodb": "^7.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   },
-  "description": ""
+   "jest":{
+    "testEnvironment": "node"
+   },
+  "description": "1. Obtener la URL del repositorio en GitHub (https://github.com/Moises5970/products-and-users---REST-API.git).\r 2. En la terminal ejecutamos*git clone* seguido de la URL.\r 3. Entramos a la carpeta por medio de cd\r 4. verificamos el estado con *git status* el resultado debe de ser similar a este:\r     On branch main\r     Your branch is up to date with 'origin/main'\r 6. Apartir de ahi se realiza los commit de la misma manera, cabe aclarar que solo los dejara si tienes acceso."
 }

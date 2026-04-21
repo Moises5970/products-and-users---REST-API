@@ -55,34 +55,45 @@ Integridad de los datos y la estandarización de respuestas de error.
 # Rutas
 ### Usuarios
 
-```
-http://localhost:3000/usuarios
-```
-
 #### POST
+
+```
+http://localhost:3000/api/usuarios
+```
 
 Crear/registrar usuarios.
 
 ![crear usuario](imag/image1.png)
 
 #### GET
+```
+http://localhost:3000/api/usuarios
+```
 
 Obtener los usuarios registrados.
 
 ![Obtener usuarios registrados](imag/image2.png)
 
 #### GET /:id
+```
+http://localhost:3000/api/usuarios/:id
+```
 
 Obtener un usuario en especifico.
-
 ![Obtener a un usuario](imag/image3.png)
 
 #### PUT /:id
+```
+http://localhost:3000/api/usuarios/:id
+```
 
 Actualizar un usuario.
 ![Actualizar un usuario](imag/image4.png)
 
 #### DELETE /:id
+```
+http://localhost:3000/api/usuarios/:id
+```
 
 Eliminar un usuario.
 ![Eliminar un usuario](imag/image5.png)
@@ -90,11 +101,10 @@ Eliminar un usuario.
 
 ### Productos
 
-```
-http://localhost:3000/productos
-```
-
 #### POST
+```
+http://localhost:3000/api/productos/:id
+```
 
 Crear/registrar productos.
 ![Resgistrar un producto](/imag/image6.png)
@@ -102,45 +112,72 @@ Crear/registrar productos.
 Se requiere el ID para identificar quien esta registrando el producto.
 
 #### GET
+```
+http://localhost:3000/api/productos
+```
 
 Obtener los productos registrados.
 ![Obtener todos los productos registrados](imag/image7.png)
 
 #### GET /:id
+```
+http://localhost:3000/api/productos/:id
+```
 
 Obtener un producto en especifico.
 ![Obtener un producto especifico](imag/image8.png)
 
 #### PUT /:id
+```
+http://localhost:3000/api/productos/:id
+```
 
 Actualizar un producto.
 ![Actualizar un producto es especifico](imag/image9.png)
 
 #### DELETE /:id
+```
+http://localhost:3000/api/productos/:id
+```
 
 Eliminar un producto.
 ![Eliminar un producto en especifico](imag/image10.png)
 
 ### Ventas
 
+#### POST
 ```
-http://localhost:3000/ventas
+http://localhost:3000/api/ventas
 ```
 
-#### POST
 ![Registrar una venta](imag/image11.png)
 En este caso se ingresa el ID por medio de body, que es otra forma de solicitarlo, ademas nos retorna el tortal a pagar de la venta.
 
 #### GET
+```
+http://localhost:3000/api/ventas
+```
+
 ![Obtener todas las ventas](imag/image12.png)
 
 #### DELETE /:id
+```
+http://localhost:3000/api/ventas:id
+```
+
 ![Eliminar una venta](imag/image13.png)
 
 #### Consultas avanzadas con agregaciones
+```
+http://localhost:3000/api/ventas/stats/productos
+```
 
 Suma del total de ventas y de la cantidad de productos vendidos.
 ![Resultado de la primiero consulta avnazada](imag/image14.png)
+
+```
+http://localhost:3000/api/productos/stats/categorias
+```
 
 Cantidad de productos por categoria.
 ![Resultado de la segunda consulta avanzada](imag/image15.png)
