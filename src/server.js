@@ -19,7 +19,7 @@ app.get("/health", (req, res) => res.json({ ok: true, service: "trace-api-mongo"
 // configurar rutas
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/productos", productosRoutes);
-app.use("/api/ventas")
+app.use("/api/ventas", ventasRoutes);
 
 // Manejo de errores
 app.use((err, req, res, next) => {

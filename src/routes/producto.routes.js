@@ -127,4 +127,42 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+
+
+/**
+ * GET /api/productos/stats/categorias
+ * Productos por categoria
+ */
+router.get("/stats/categorias", async (req, res, next) => {
+  try {
+    const db = await getDB();
+
+    const result = await db.collection("productos").aggregate([
+      {
+        $match: {
+          categoria: { $exists: true }
+        }
+      },
+      {
+        $group: {
+          _id: "$categoria",
+          totalProductos: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          categoria: "$_id",
+          totalProductos: 1,
+          _id: 0
+        }
+      }
+    ]).toArray();
+
+    res.status(200).json({ ok: true, data: result });
+
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;

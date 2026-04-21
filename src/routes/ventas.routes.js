@@ -131,62 +131,63 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-      
-      /**
-       * GET /api/ventas/stats/productos
-       * Total de ventas por producto (AGGREGATION)
-       */
-      router.get("/stats/productos", async (req, res, next) => {
-        try {
-          const db = await getDB();
-      
-          const result = await db.collection("ventas").aggregate([
-      
-            // 1. Filtrar ventas válidas
-            {
-              $match: {
-                total: { $gt: 0 }
-              }
-            },
-      
-            // 2. Agrupar por producto
-            {
-              $group: {
-                _id: "$productoId",
-                totalVentas: { $sum: "$total" },
-                cantidadVendida: { $sum: "$cantidad" }
-              }
-            },
-      
-            // 3. Relacionar con productos
-            {
-              $lookup: {
-                from: "productos",
-                localField: "_id",
-                foreignField: "_id",
-                as: "producto"
-              }
-            },
-      
-            { $unwind: "$producto" },
-      
-            // 4. Formatear salida
-            {
-              $project: {
-                producto: "$producto.nombre",
-                totalVentas: 1,
-                cantidadVendida: 1,
-                _id: 0
-              }
-            }
-      
-          ]).toArray();
-      
-          res.status(200).json({ ok: true, data: result });
-      
-        } catch (err) {
-          next(err);
+//============================== Consultas avanzadas con agregaciones ===========================================
+
+/**
+ * GET /api/ventas/stats/productos
+ * Total de ventas por producto (AGGREGATION)
+ */
+router.get("/stats/productos", async (req, res, next) => {
+  try {
+    const db = await getDB();
+
+    const result = await db.collection("ventas").aggregate([
+
+      // 1. Filtrar ventas válidas
+      {
+        $match: {
+          total: { $gt: 0 }
         }
-      });
+      },
+
+      // 2. Agrupar por producto
+      {
+        $group: {
+          _id: "$productoId",
+          totalVentas: { $sum: "$total" },
+          cantidadVendida: { $sum: "$cantidad" }
+        }
+      },
+
+      // 3. Relacionar con productos
+      {
+        $lookup: {
+          from: "productos",
+          localField: "_id",
+          foreignField: "_id",
+          as: "producto"
+        }
+      },
+
+      { $unwind: "$producto" },
+
+      // 4. Formatear salida
+      {
+        $project: {
+          producto: "$producto.nombre",
+          totalVentas: 1,
+          cantidadVendida: 1,
+          _id: 0
+        }
+      }
+
+    ]).toArray();
+
+    res.status(200).json({ ok: true, data: result });
+
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default router;
