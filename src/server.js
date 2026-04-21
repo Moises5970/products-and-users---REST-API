@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./db.js";
-
+import { errorHandler } from "./middlewares/error.js";
 // importar rutas
 import usuariosRoutes from "./routes/usuario.routes.js"
 import productosRoutes from "./routes/producto.routes.js"
@@ -14,6 +14,7 @@ const app = express();
 
 app.use(express.json());
 
+
 // Healthcheck
 app.get("/health", (req, res) => res.json({ ok: true, service: "trace-api-mongo" }));
 
@@ -22,14 +23,7 @@ app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/productos", productosRoutes);
 app.use("/api/ventas", ventasRoutes);
 
-// Manejo de errores
-app.use((err, req, res, next) => {
-    const status = err.status || 500;
-    res.status(status).json({
-        ok: false,
-        error: err.message || "Error interno",
-    });
-});
+
 
 const port = process.env.PORT || 3000;
 
@@ -41,3 +35,13 @@ connectDB()
         console.error("No se pudo conectar a MongoDB:", e);
         process.exit(1);
     });
+
+// Capturar rutas no encontradas (404)
+app.use((req, res) => {
+    res.status(404).json({
+        ok: false,
+        error: "La ruta solicitada no existe."
+    });
+});
+
+app.use(errorHandler)

@@ -40,3 +40,14 @@ Dado que las colecciones fueron creadas y pobladas previamente, se utilizó el c
   * Campos obligatorios: `productoId`, `cantidad`, `total`.
   * Restricciones: La `cantidad` mínima es 1 y el `total` no puede ser menor a 0.
   * Relación: `productoId` exige un formato `ObjectId` válido.
+
+  ### Integrante 2: Validación y Manejo de Errores
+Integridad de los datos y la estandarización de respuestas de error.
+
+* **Validación Nativa en MongoDB:** Implementación de esquemas de validación mediante `collMod` y `$jsonSchema` para garantizar que solo ingresen datos válidos (precios positivos, stock no negativo, campos obligatorios) directamente a nivel de base de datos.
+* **Middleware de Errores Global:** Creación de un `errorHandler` centralizado que intercepta excepciones de MongoDB y del servidor, transformándolas en respuestas JSON amigables.
+* **Gestión de Respuestas HTTP:**
+    * **400 (Bad Request):** Para fallos de validación de esquemas.
+    * **404 (Not Found):** Captura de rutas inexistentes para evitar respuestas HTML por defecto de Express.
+    * **500 (Internal Server Error):** Manejo seguro de errores inesperados.
+* **Conexión Segura:** Integración de las reglas de validación en el ciclo de vida del arranque del servidor en `db.js`.
