@@ -20,18 +20,23 @@ Sustituimos el *"type": "commonjs"* por *"type": "module"*
 
 # Modelos y Validaciones de BD
 
-Para esta API, se implementó la validación de esquemas nativos de MongoDB utilizando `$jsonSchema` utilizando el driver oficial.
+## Validaciones y Manejo de Errores 
 
-* **Usuarios** *Campos Obligatorios: `nombre`, `email`, `rol`.
-  * Validación estricta de formato de correo electronico mediante las expresiones regulares.
-  * Restricción de valores para el campo del `rol` permiriendo solo dos tipo 'admin' o 'cliente'
+Para esta API se utilizó el driver oficial de MongoDB. Las reglas de negocio y la estructura de datos se blindaron a dos niveles: a nivel de base de datos y a nivel de rutas.
+
+### 1. Validación Nativa en MongoDB ($jsonSchema)
+Dado que las colecciones fueron creadas y pobladas previamente, se utilizó el comando `collMod` para inyectar reglas estrictas de validación a los documentos existentes y futuros:
+
+* **Usuarios:** * Campos obligatorios: `nombre`, `email`, `rol`.
+  * Formato: Correo electrónico validado mediante expresiones regulares.
+  * Restricción: El campo `rol` utiliza un `enum` que solo permite 'admin' o 'cliente'.
 
 * **Productos:**
   * Campos obligatorios: `nombre`, `precio`, `categoria`.
-  * Restricciones: Se prohíbe el insertar de valores negativos en los campos `precio` y `stock`.
-  * Relaciones: Implementación de referencia guardando el `ObjectId` del usuario en el campo `creadoPor`.
+  * Restricciones numéricas: `precio` y `stock` no aceptan valores negativos.
+  * Relación: `creadoPor` guarda la referencia en formato String del usuario creador.
 
 * **Ventas:**
   * Campos obligatorios: `productoId`, `cantidad`, `total`.
-  * Relación: Enlace con el documento de la colección de productos mediante `ObjectId`.
-  * Reglas de negocio: La `cantidad` mínima de venta es 1 y el `total` no puede ser un valor negativo.
+  * Restricciones: La `cantidad` mínima es 1 y el `total` no puede ser menor a 0.
+  * Relación: `productoId` exige un formato `ObjectId` válido.
