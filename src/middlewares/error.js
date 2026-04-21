@@ -4,7 +4,7 @@ export const errorHandler = (err, req, res, next) => { // Log del error para des
 
 
 // validacion de mongodb
-if(err.code === 121){ // si el error es de validacion de mongodb (code 121)
+if(err.code === 121 || err.name === 'MongoServerError' && err.message.includes("validacion fallo")){ // si el error es de validacion de mongodb (code 121)
     return res.status(400).json({ // respondemos con un error 400 (bad request)
         ok: false, // se indica que la respuesta no es exitosa
         error: " Los datos proporcionados no cumplen con las reglas de validación de la base de datos", // mensaje de error 

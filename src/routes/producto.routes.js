@@ -36,7 +36,9 @@ router.post("/", async (req, res, next) => {
     if (err?.code === 11000) {
       ((err.status = 409), (err.message = "El email ya esta registrado"));
     }
+    next(err)
   }
+  
 });
 
 /**
