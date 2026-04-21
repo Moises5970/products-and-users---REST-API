@@ -5,6 +5,7 @@ import { connectDB } from "./db.js";
 // importar rutas
 import usuariosRoutes from "./routes/usuario.routes.js"
 import productosRoutes from "./routes/producto.routes.js"
+import ventasRoutes from "./routes/ventas.routes.js"
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.get("/health", (req, res) => res.json({ ok: true, service: "trace-api-mongo"
 // configurar rutas
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/productos", productosRoutes);
+app.use("/api/ventas")
 
 // Manejo de errores
 app.use((err, req, res, next) => {
