@@ -41,11 +41,11 @@ export async function configurarColecciones(db) { // Configura las reglas de val
                             bsonType: "string"  // el campo nombre debe ser de tipo string
                         },
                         precio: {  // campo precio
-                            bsonType: "double", // el campo precio debe ser de tipo double
+                            bsonType: "number", // el campo precio debe ser de tipo double
                             minimum: 0 // el campo precio no puede ser negativo
                         },
                         stock: { // campo stock
-                            bsonType: "int", // el campo stock debe ser de tipo entero
+                            bsonType: "number", // el campo stock debe ser de tipo entero
                             minimum: 0 // el campo stock no puede ser negativo
                         },
                         categoria: { // campo categoria

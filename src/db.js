@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
+import { configurarColecciones } from "./models/collection_configure.js";
 
 let client;
 let db;
@@ -12,6 +13,7 @@ export async function connectDB() {
     db = client.db(process.env.DB_NAME);
 
     console.log("MongoDB conectado a:", process.env.DB_NAME);
+    await configurarColecciones(db);
     return db;
 }
 

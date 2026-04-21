@@ -6,6 +6,7 @@ import { connectDB } from "./db.js";
 import usuariosRoutes from "./routes/usuario.routes.js"
 import productosRoutes from "./routes/producto.routes.js"
 import ventasRoutes from "./routes/ventas.routes.js"
+import { configurarColecciones } from "./models/collection_configure.js"
 
 dotenv.config();
 
